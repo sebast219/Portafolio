@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5173:5173"
+    volumes:
+      # Opcional: cambios en el código se reflejan sin reconstruir
+      - .:/app
+      - /app/node_modules  # evita sobrescribir node_modules del contenedor
+    environment:
+      - NODE_ENV=development

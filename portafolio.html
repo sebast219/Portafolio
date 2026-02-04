@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sebastian Yepes | Desarrollador Frontend</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --light: #f8fafc;
+      --dark: #0f172a;
+    }
+    [data-bs-theme="dark"] {
+      --bs-body-bg: #0f172a;
+      --bs-body-color: #e2e8f0;
+    }
+    html { scroll-behavior: smooth; }
+    body { padding-top: 80px; font-family: system-ui, -apple-system, sans-serif; }
+    .navbar { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80') center/cover no-repeat fixed;
+    }
+    .section-title {
+      position: relative;
+      display: inline-block;
+      font-weight: 800;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), #a5b4fc);
+      border-radius: 2px;
+    }
+    .card-project {
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      overflow: hidden;
+      border: none;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    [data-bs-theme="dark"] .card-project { background: rgba(15,23,42,0.4); border-color: rgba(255,255,255,0.1); }
+    .card-project:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.25) !important;
+    }
+    .skill-bar { height: 8px; background: rgba(99,102,241,0.15); border-radius: 4px; overflow: hidden; }
+    .skill-fill { height: 100%; background: var(--primary); transition: width 1.2s ease; }
+    .theme-toggle { cursor: pointer; font-size: 1.4rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white bg-opacity-75 border-bottom fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-4" href="#inicio">Sebastian Yepes</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navPortfolio">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navPortfolio">
+        <ul class="navbar-nav ms-auto align-items-center gap-3">
+          <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sobre-mi">Sobre mí</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experiencia">Experiencia</a></li>
+          <li class="nav-item"><a class="nav-link" href="#proyectos">Proyectos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+          <li class="nav-item">
+            <i class="bi bi-moon-stars-fill theme-toggle ms-2" id="themeToggle"></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="inicio" class="hero d-flex align-items-center text-white">
+    <div class="container position-relative z-1">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-9">
+          <p class="text-indigo-300 fs-5 fw-semibold mb-3" data-aos="fade-down">Desarrollador Frontend</p>
+          <h1 class="display-3 fw-extrabold mb-4" data-aos="fade-up" data-aos-delay="100">
+            Hola, soy <span class="text-primary">Sebastian Yepes</span>
+          </h1>
+          <p class="lead fs-4 mb-5 opacity-90" data-aos="fade-up" data-aos-delay="200">
+            Creo interfaces modernas, rápidas y accesibles.<br>React · Tailwind · TypeScript · Performance obsesivo.
+          </p>
+          <div class="d-flex gap-4 justify-content-center flex-wrap" data-aos="fade-up" data-aos-delay="300">
+            <a href="#proyectos" class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow-lg">Ver mis proyectos</a>
+            <a href="#contacto" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">Hablemos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre mí -->
+  <section id="sobre-mi" class="py-5 py-lg-5 bg-light-subtle">
+    <div class="container">
+      <h2 class="section-title mb-5 text-center" data-aos="fade-up">Sobre mí</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <p class="lead text-secondary lh-lg mb-4" data-aos="fade-up" data-aos-delay="100">
+            Soy Sebastian, desarrollador frontend con sede en Antioquia, Colombia. Me apasiona transformar ideas en experiencias digitales fluidas, intuitivas y visualmente atractivas.
+          </p>
+          <p class="text-secondary lh-lg mb-4" data-aos="fade-up" data-aos-delay="150">
+            Me especializo en React, TypeScript, Tailwind CSS y en optimizar el rendimiento web. Siempre busco el balance perfecto entre diseño moderno, accesibilidad (WCAG) y velocidad de carga (Core Web Vitals).
+          </p>
+          <p class="text-secondary lh-lg" data-aos="fade-up" data-aos-delay="200">
+            Fuera del código disfruto del café colombiano, la música electrónica y aprender sobre nuevas tecnologías (actualmente explorando Server Components y WebGPU).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiencia (nueva sección recomendada) -->
+  <section id="experiencia" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="section-title mb-5 text-center" data-aos="fade-up">Experiencia</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-8" data-aos="fade-right">
+          <div class="timeline ps-4 border-start border-primary border-3">
+            <div class="mb-5">
+              <h4 class="fw-bold">Desarrollador Frontend Freelance</h4>
+              <p class="text-muted small mb-1">2023 – Presente</p>
+              <p>Desarrollo de aplicaciones web SPA, landing pages de alto rendimiento y mantenimiento de productos SaaS para clientes en Latam y EE.UU.</p>
+            </div>
+            <div class="mb-5">
+              <h4 class="fw-bold">Frontend en [Nombre Empresa / Proyecto]</h4>
+              <p class="text-muted small mb-1">2022 – 2023</p>
+              <p>Implementación de interfaces con React + Next.js, migración de proyectos legacy a arquitecturas modernas.</p>
+            </div>
+            <!-- Agrega más según tu caso real -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyectos -->
+  <section id="proyectos" class="py-5 bg-light-subtle">
+    <div class="container">
+      <h2 class="section-title mb-5 text-center" data-aos="fade-up">Proyectos destacados</h2>
+      <div class="row g-4">
+        <!-- Proyecto 1 -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up">
+          <div class="card card-project h-100">
+            <img src="https://images.unsplash.com/photo-1555066931-bf19c65c7a5e?auto=format&fit=crop&q=80&w=800" class="card-img-top" alt="Proyecto 1" loading="lazy">
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">E-commerce Next.js + Stripe</h5>
+              <p class="card-text text-secondary small mb-3">Tienda online con carrito persistente, autenticación y pagos reales. Optimizado para SEO y mobile-first.</p>
+              <div class="d-flex gap-2 flex-wrap mb-3">
+                <span class="badge bg-indigo-100 text-indigo-700">Next.js</span>
+                <span class="badge bg-indigo-100 text-indigo-700">Tailwind</span>
+                <span class="badge bg-indigo-100 text-indigo-700">TypeScript</span>
+              </div>
+              <a href="#" target="_blank" class="btn btn-sm btn-outline-primary">Ver proyecto →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 2 y 3 → agrega tus proyectos reales con capturas propias -->
+        <!-- Repite estructura similar -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Habilidades -->
+  <section id="habilidades" class="py-5">
+    <div class="container">
+      <h2 class="section-title mb-5 text-center" data-aos="fade-up">Habilidades técnicas</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-5 col-lg-4" data-aos="fade-right">
+          <div class="mb-4">
+            <div class="d-flex justify-content-between mb-1">
+              <span>React & Next.js</span>
+              <span>95%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+          </div>
+          <div class="mb-4">
+            <div class="d-flex justify-content-between mb-1">
+              <span>TypeScript</span>
+              <span>88%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+          </div>
+          <!-- Agrega más: Tailwind, Zustand/Redux, Git, Figma, Testing (Jest), etc. -->
+        </div>
+        <div class="col-md-5 col-lg-4" data-aos="fade-left">
+          <!-- Otra columna con más habilidades -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="py-5 bg-dark text-white">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7 text-center">
+          <h2 class="section-title mb-4 text-white">¿Trabajamos juntos?</h2>
+          <p class="lead mb-5">Estoy disponible para proyectos freelance, colaboraciones o posiciones frontend.</p>
+
+          <form action="https://formspree.io/f/tu-id-aqui" method="POST" class="row g-3 justify-content-center">
+            <div class="col-md-6">
+              <input type="text" class="form-control form-control-lg" name="name" placeholder="Tu nombre" required>
+            </div>
+            <div class="col-md-6">
+              <input type="email" class="form-control form-control-lg" name="email" placeholder="tu@email.com" required>
+            </div>
+            <div class="col-12">
+              <textarea class="form-control form-control-lg" name="message" rows="5" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary btn-lg px-5">Enviar mensaje</button>
+            </div>
+          </form>
+
+          <div class="mt-5 d-flex gap-4 justify-content-center">
+            <a href="https://github.com/tuusuario" class="text-white fs-3"><i class="bi bi-github"></i></a>
+            <a href="https://linkedin.com/in/tuusuario" class="text-white fs-3"><i class="bi bi-linkedin"></i></a>
+            <a href="https://twitter.com/tuusuario" class="text-white fs-3"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-4 bg-black text-white-50 text-center small">
+    <div class="container">
+      © <span id="year"></span> Sebastian Yepes • Hecho con pasión en Colombia
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 700, once: true });
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Dark mode toggle simple
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-bs-theme');
+      html.setAttribute('data-bs-theme', current === 'dark' ? 'light' : 'dark');
+      toggle.classList.toggle('bi-moon-stars-fill');
+      toggle.classList.toggle('bi-sun-fill');
+    });
+  </script>
+</body>
+</html>
