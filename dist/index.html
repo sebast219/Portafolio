@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sebastian Yepes · Portafolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="/assets/index-B7-Xu-kA.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-7qjGli_C.css">
+  </head>
+  <body>
+    <script>
+      const theme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (theme === 'dark' || (!theme && prefersDark)) document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+    </script>
+    <div id="root"></div>
+  </body>
+</html>

@@ -1,10 +1,24 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { IconFolderOpen, IconMail, IconGithub, IconLinkedin } from './Icons'
+import { useParallax } from '../hooks/useParallax'
 
-const roles = ['Desarrollador Frontend', 'Creador de Experiencias', 'Ingeniero Web']
+const roles = ['Desarrollador Fullstack', 'Creador de Experiencias Digitales UX/UI', 'DEVELOPERS BACKEND Y FRONTEND']
 
 function Hero() {
   const [textIndex, setTextIndex] = useState(0)
+  const parallaxOffset = useParallax(0.3)
+  const heroRef = useRef(null)
+  const particles = useMemo(
+    () =>
+      [...Array(20)].map(() => ({
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        speed: 0.2 + Math.random() * 0.3,
+        delay: `${Math.random() * 5}s`,
+      })),
+    []
+  )
 
   useEffect(() => {
     const id = setInterval(() => setTextIndex((i) => (i + 1) % roles.length), 3000)
@@ -13,65 +27,104 @@ function Hero() {
 
   return (
     <section
+      ref={heroRef}
       id="inicio"
-      className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden parallax-container"
+      style={{
+        background: `linear-gradient(135deg, #000000 0%, #0A0A0A 50%, #141414 100%)`
+      }}
     >
-      {/* Fondo con gradiente animado */}
-      <div
-        className="absolute inset-0 bg-[length:300%_300%] animate-gradient"
+      {/* Parallax background elements */}
+      <div 
+        className="absolute inset-0 parallax-element"
         style={{
-          backgroundImage:
-            'linear-gradient(135deg, rgba(99,102,241,0.06) 0%, rgba(139,92,246,0.06) 35%, rgba(236,72,153,0.04) 70%, rgba(99,102,241,0.06) 100%)',
+          transform: `translateY(${parallaxOffset * 0.5}px)`,
+          background: 'radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)'
         }}
       />
-      <div className="absolute top-[20%] left-[10%] w-72 h-72 rounded-full bg-primary-400/10 animate-float" />
-      <div className="absolute bottom-[20%] right-[10%] w-56 h-56 rounded-full bg-accent-violet/10 animate-float" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-1/2 right-[25%] w-32 h-32 rounded-full bg-accent-pink/10 animate-float" style={{ animationDelay: '2s' }} />
-
+      <div 
+        className="absolute inset-0 parallax-element"
+        style={{
+          transform: `translateY(${parallaxOffset * 0.3}px)`,
+          background: 'radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)'
+        }}
+      />
+      
+      {/* Animated particles */}
+      <div className="absolute inset-0">
+        {particles.map((p, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-blue-500/20 rounded-full parallax-slow"
+            style={{
+              left: p.left,
+              top: p.top,
+              transform: `translateY(${parallaxOffset * p.speed}px)`,
+              animationDelay: p.delay,
+            }}
+          />
+        ))}
+      </div> 
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="animate-fade-in-up">
-            <p className="inline-flex items-center gap-2 text-primary-500 dark:text-primary-400 font-semibold text-sm uppercase tracking-wider mb-4">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="inline-flex items-center gap-2 text-primary-400 font-semibold text-sm uppercase tracking-wider mb-4">
               <span className="inline-block w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
-              <span className="transition-all duration-500">{roles[textIndex]}</span>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={roles[textIndex]}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block"
+                >
+                  {roles[textIndex]}
+                </motion.span>
+              </AnimatePresence>
             </p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-800 dark:text-slate-100 mb-6 leading-tight">
-              Hola, soy{' '}
-              <span className="bg-gradient-to-r from-primary-500 via-accent-violet to-accent-pink bg-clip-text text-transparent">
-                Sebastian Yepes
-              </span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
+              Hola, soy Sebastian
             </h1>
-            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
               Transformo ideas en{' '}
-              <span className="font-semibold text-primary-500 dark:text-primary-400">experiencias digitales</span>{' '}
+              <span className="font-semibold text-primary-400">experiencias digitales</span>{' '}
               modernas, rápidas y accesibles.
               <br />
-              <span className="text-slate-500 dark:text-slate-500 text-base mt-2 inline-block">
+              <span className="text-gray-400 text-base mt-2 inline-block">
                 React · TypeScript · Tailwind CSS · Performance obsesivo
               </span>
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <a
+              <motion.a
                 href="#proyectos"
-                className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary-500 to-accent-violet text-white font-semibold shadow-lg shadow-primary-500/30 hover:shadow-primary-500/40 hover:-translate-y-0.5 transition-all duration-300"
+                className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary-500 to-accent-indigo text-white font-semibold shadow-lg shadow-primary-500/30 hover:shadow-primary-500/40 hover:-translate-y-0.5 transition-all duration-300"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <IconFolderOpen className="w-5 h-5" />
                 Ver proyectos
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="#contacto"
-                className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border-2 border-primary-500 text-primary-500 dark:text-primary-400 font-semibold hover:bg-primary-500 hover:text-white dark:hover:bg-primary-500 dark:hover:text-white transition-all duration-300 hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border-2 border-primary-500 text-primary-400 font-semibold hover:bg-primary-500 hover:text-white transition-all duration-300 hover:-translate-y-0.5"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <IconMail className="w-5 h-5" />
                 Contactar
-              </a>
+              </motion.a>
             </div>
             <div className="mt-10 flex justify-center gap-6">
               <a
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-500 dark:text-slate-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="text-gray-400 hover:text-primary-400 transition-colors p-2 rounded-lg hover:bg-white/10 glass-effect"
                 aria-label="GitHub"
               >
                 <IconGithub className="w-6 h-6" />
@@ -80,13 +133,13 @@ function Hero() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-500 dark:text-slate-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="text-gray-400 hover:text-primary-400 transition-colors p-2 rounded-lg hover:bg-white/10 glass-effect"
                 aria-label="LinkedIn"
               >
                 <IconLinkedin className="w-6 h-6" />
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
