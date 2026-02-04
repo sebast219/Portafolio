@@ -7,11 +7,40 @@
     @apply scroll-smooth;
   }
   body {
-    @apply antialiased bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-200 transition-colors duration-300;
+    @apply antialiased bg-black text-white transition-colors duration-300;
   }
 }
 
-/* Reducir movimiento si el usuario lo prefiere */
+/* Parallax utility classes */
+@layer utilities {
+  .parallax-container {
+    @apply relative overflow-hidden;
+  }
+  
+  .parallax-element {
+    @apply transition-transform duration-300 ease-out;
+    will-change: transform;
+  }
+  
+  .parallax-slow {
+    @apply transition-transform duration-500 ease-out;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+  
+  .glass-effect-light {
+    @apply backdrop-blur-md bg-black/5 border border-gray-200/50;
+  }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion if user prefers */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -20,5 +49,8 @@
   }
   html {
     scroll-behavior: auto;
+  }
+  .parallax-element {
+    transform: none !important;
   }
 }
